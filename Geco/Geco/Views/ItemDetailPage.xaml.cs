@@ -20,18 +20,38 @@ namespace Geco.Views
             BindingContext = this.viewModel = viewModel;
         }
 
-        public ItemDetailPage()
+        public ItemDetailPage(string name)
         {
             InitializeComponent();
 
             var item = new Item
             {
-                Text = "Item 1",
+                Text = name,
                 Description = "This is an item description."
             };
 
             viewModel = new ItemDetailViewModel(item);
             BindingContext = viewModel;
+        }
+
+        private void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
+        {
+            Anagrafica.IsVisible = true;
+            AnagraficaLabel.FontAttributes = FontAttributes.Bold;
+            AnagraficaLabel.TextColor = Color.Black;
+            Settings.IsVisible = false;
+            SettingsLabel.FontAttributes = FontAttributes.None;
+            SettingsLabel.TextColor = Color.DarkGray;
+        }
+        
+        private void TapGestureRecognizerSettings_OnTapped(object sender, EventArgs e)
+        {
+            Anagrafica.IsVisible = false;
+            AnagraficaLabel.FontAttributes = FontAttributes.None;
+            AnagraficaLabel.TextColor = Color.DarkGray;
+            Settings.IsVisible = true;
+            SettingsLabel.FontAttributes = FontAttributes.Bold;
+            SettingsLabel.TextColor = Color.Black;
         }
     }
 }

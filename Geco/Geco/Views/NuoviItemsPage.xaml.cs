@@ -17,15 +17,15 @@ using XLabs.Forms.Controls;
 namespace Geco.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ItemsPage : ContentPage
+    public partial class NuoviItemsPage : ContentPage
     {
-        ItemsViewModel viewModel;
+        NuoviItemsViewModel viewModel;
 
-        public ItemsPage()
+        public NuoviItemsPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new NuoviItemsViewModel();
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -35,18 +35,17 @@ namespace Geco.Views
                 return;
             // Manually deselect item.
             ItemsListView.SelectedItem = null;
+            
+            
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
             ItemsListView.IsVisible = false;
             Indicator.IsVisible = true;
-            UploadBtn.IsEnabled = false;
             await Task.Delay(1700);
             ItemsListView.IsVisible = true;
             Indicator.IsVisible = false;
-            UploadBtn.IsEnabled = true;
-
         }
 
         protected override void OnAppearing()
@@ -59,11 +58,6 @@ namespace Geco.Views
 
         private async void Button_OnClicked(object sender, EventArgs e)
         {
-            UploadBtn.IsEnabled = false;
-            await ProgressBar.ProgressTo (1, 1000, Easing.Linear);
-            ProgressBar.Progress = 0;
-            UploadBtn.IsEnabled = true;
-
             foreach (var item in viewModel.Items)
             {
                 if (item.Checked)
@@ -87,25 +81,22 @@ namespace Geco.Views
             
         }
 
-        private void CheckBoxAll_OnCheckedChanged(object sender, EventArgs<bool> e)
+        private async void ClickGestureRecognizer_OnClicked(object sender, EventArgs e)
         {
-            var sel = viewModel.Items.Any(i => i.Checked);
-            if (!sel)
+            ItemsListView.SelectedItem = null;
+            var item = viewModel.Items.FirstOrDefault(i => i.Text == (sender as Image)?.ClassId);
+            var delete = await DisplayAlert($"Rimuovere {item?.Text}?", "L'asset verrà rimosso dalla configurazione", "Rimuovi", "Annulla");
+            if (delete)
             {
-                CheckBoxAll.DefaultText = "Seleziona tutti";
-                foreach (var item in viewModel.Items)
-                {
-                    item.Checked = false;
-                }
+                viewModel.Items.Remove(item);
             }
-            else
-            {
-                CheckBoxAll.DefaultText = "Deseleziona tutti";
-                foreach (var item in viewModel.Items)
-                {
-                    item.Checked = true;
-                }
-            }
+        }
+
+        private async void ClickGestureRecognizerDetail_OnClicked(object sender, EventArgs e)
+        {
+            ItemsListView.SelectedItem = null;
+            var item = viewModel.Items.FirstOrDefault(i => i.Text == (sender as Image)?.ClassId);
+            await Navigation.PushAsync(new ItemDetailPage(item?.Text));
         }
     }
 }

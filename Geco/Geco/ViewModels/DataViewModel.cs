@@ -10,14 +10,14 @@ using Geco.Views;
 
 namespace Geco.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class DataViewModel : BaseViewModel
     {
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        public DataViewModel()
         {
-            Title = "Assets";
+            Title = "Data";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 

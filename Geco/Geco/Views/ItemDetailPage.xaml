@@ -3,10 +3,64 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Geco.Views.ItemDetailPage"
              Title="{Binding Title}">
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Item.Text}" FontSize="Small"/>
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" FontSize="Small"/>
-    </StackLayout>
+    <ScrollView>
+        <StackLayout Padding="15">
+            
+            <ContentView HorizontalOptions="FillAndExpand" HeightRequest="40">
+                <StackLayout Orientation="Horizontal">
+                    <Label x:Name="AnagraficaLabel" Text="ANAGRAFICA" FontSize="Medium" FontAttributes="Bold" TextColor="Black" 
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="SettingsLabel" Text="CONFIGURAZIONE" FontSize="Medium" FontAttributes="None" TextColor="DarkGray" 
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerSettings_OnTapped"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </ContentView>
+            
+            <StackLayout x:Name="Anagrafica">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Nome:" FontSize="Small" HorizontalOptions="Start" VerticalTextAlignment="Center"/>
+                    <Entry Text="{Binding Item.Text}" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Flotta:" FontSize="Small" HorizontalOptions="Start" VerticalTextAlignment="Center"/>
+                    <Entry Text="milano est" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Gruppo:" FontSize="Small" HorizontalOptions="Start" VerticalTextAlignment="Center"/>
+                    <Entry Text="gruppo A" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Sottogruppo:" FontSize="Small" HorizontalOptions="Start" VerticalTextAlignment="Center"/>
+                    <Entry Text="123" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Coordinate:" FontSize="Small" HorizontalOptions="Start" VerticalTextAlignment="Center"/>
+                    <Entry Text="N 41° 53' 24″ E 12° 29' 32″" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Indirizzo:" FontSize="Small" HorizontalOptions="Start" VerticalTextAlignment="Center"/>
+                    <Entry Text="via Merano 3, Milano 20127" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            </StackLayout>
+            
+            <StackLayout x:Name="Settings" IsVisible="False">
+                <Label Text="TO BE DEFINED"></Label>
+            </StackLayout>
+            <Button Text="Salva" VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

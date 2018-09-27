@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="Geco.Views.NuoviItemsPage"
+              Title="{Binding Title}"
+             x:Name="BrowseItemsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="SCAN" Clicked="AddItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Spacing="0"
+                 BackgroundColor="{StaticResource NavigationPrimary}">
+        <ContentView x:Name="Indicator" 
+                     IsVisible="False"
+                     HorizontalOptions="FillAndExpand" 
+                     VerticalOptions="FillAndExpand" 
+                     BackgroundColor="White">
+            <ActivityIndicator HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               IsRunning="True"></ActivityIndicator>
+        </ContentView>
+        <ListView x:Name="ItemsListView"
+                  BackgroundColor="White"
+                ItemsSource="{Binding Items}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadItemsCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout>
+                                    <Label Text="{Binding Text}" 
+                                           LineBreakMode="NoWrap"/>                            
+                                    <Label Text="{Binding Description}" 
+                                           LineBreakMode="NoWrap"
+                                           Style="{DynamicResource ListItemDetailTextStyle}"
+                                           FontSize="13" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                    <Image Source="delete.png" VerticalOptions="Center" Margin="0,0,5,0" ClassId="{Binding Text}" HeightRequest="30" WidthRequest="30">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ClickGestureRecognizer_OnClicked"></TapGestureRecognizer>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Image Source="detail.png" VerticalOptions="Center" Margin="0,0,10,0" ClassId="{Binding Text}" HeightRequest="40" WidthRequest="40">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ClickGestureRecognizerDetail_OnClicked"></TapGestureRecognizer>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                            </StackLayout>                            
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

@@ -1,11 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="Geco.Views.MenuPage"
              Title="Menu">
-    <StackLayout VerticalOptions="FillAndExpand">
+    <StackLayout VerticalOptions="FillAndExpand" Spacing="0">
+        <StackLayout Spacing="0"
+                     Padding="30"
+                     BackgroundColor="{StaticResource NavigationPrimary}">
+            <Image Source="tools.png"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   HeightRequest="150"/>
+            <Label Text="Installatore"
+                   BackgroundColor="{StaticResource NavigationPrimary}"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontSize="Large"/>
+        </StackLayout>
         <ListView x:Name="ListViewMenu"
-                    HasUnevenRows="True">
+                    HasUnevenRows="True"
+                    BackgroundColor="{StaticResource NavigationPrimary}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

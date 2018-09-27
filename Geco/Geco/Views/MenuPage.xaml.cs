@@ -1,7 +1,10 @@
 ﻿using Geco.Models;
 using System;
 using System.Collections.Generic;
-
+using System.IO;
+using System.Reflection;
+using SkiaSharp;
+using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +21,9 @@ namespace Geco.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
+                new HomeMenuItem {Id = MenuItemType.Assets, Title="Assets" },
+                new HomeMenuItem {Id = MenuItemType.NuoviAssets, Title="Nuovi Assets" },
+                new HomeMenuItem {Id = MenuItemType.Data, Title="Data" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" }
             };
 

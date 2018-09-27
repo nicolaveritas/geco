@@ -2,18 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
-             x:Class="Geco.Views.ItemsPage"
+             x:Class="Geco.Views.DataPage"
               Title="{Binding Title}"
              x:Name="BrowseItemsPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="SCAN" Clicked="AddItem_Clicked"/>
-    </ContentPage.ToolbarItems>
-
     <StackLayout Spacing="0"
                  BackgroundColor="{StaticResource NavigationPrimary}">
-        <ContentView Padding="10" BackgroundColor="White">
-            <controls:CheckBox x:Name="CheckBoxAll" CheckedChanged="CheckBoxAll_OnCheckedChanged" DefaultText="Seleziona tutti"></controls:CheckBox>
-        </ContentView>
         <ContentView x:Name="Indicator" 
                      IsVisible="False"
                      HorizontalOptions="FillAndExpand" 
@@ -37,8 +30,8 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10">
-                            <controls:CheckBox DefaultText="{Binding Text}" Checked="{Binding Checked}" CheckedChanged="CheckBox_OnCheckedChanged"/>
-                            
+                            <Label Text="{Binding Text}" 
+                                   LineBreakMode="NoWrap"/>
                             <Label Text="{Binding Description}" 
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
@@ -50,7 +43,7 @@
         </ListView>
         <ProgressBar Progress="0"
                      x:Name="ProgressBar"/>
-        <Button Text="Configure and upload" x:Name="UploadBtn"
+        <Button Text="Upload" x:Name="UploadBtn"
                 Clicked="Button_OnClicked"></Button>
     </StackLayout>
 </ContentPage>

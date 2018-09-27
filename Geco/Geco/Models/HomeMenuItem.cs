@@ -6,7 +6,9 @@ namespace Geco.Models
 {
     public enum MenuItemType
     {
-        Browse,
+        Assets,
+        NuoviAssets,
+        Data,
         About
     }
     public class HomeMenuItem
